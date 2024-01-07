@@ -65,7 +65,7 @@ Beklenen Sonuç : Boş bırakılıp giriş yap butonuna tıklandığı durumda k
 
 
 
-## Başarılı  py test kontrolü 
+##  E-posta ve Şifre Girilmediğinde  py test kontrolü 
 
 
 
@@ -99,7 +99,7 @@ Beklenen Sonuç: Kullanıcı bilgilerini hatalı girdiyse bir sonraki sayfaya ge
 
 
 
-## Başarılı  py test kontrolü 
+## Hatalı şifre ve E-posta py test kontrolü 
 
 
 
