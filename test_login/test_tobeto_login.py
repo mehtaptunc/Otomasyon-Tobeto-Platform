@@ -10,8 +10,7 @@ import openpyxl
 from constants import globalConstants as c
 
 
-#Test Senaryosu 1 Adı : Giriş Paneli Kontrolü
-#Case 1 : Başarılı Giriş Kontrolü
+
 
 
 class Test_Tobeto_Platform_Login_Test:
@@ -24,6 +23,10 @@ class Test_Tobeto_Platform_Login_Test:
     def teardown_method(self): 
         self.driver.quit()
 
+
+    #Test Senaryosu 1 Adı : Giriş Paneli Kontrolü
+    #Case 1 : Başarılı Giriş Kontrolü
+
     @pytest.mark.parametrize("email, password", [("kojacer986@vasteron.com", "deneme123")])
     def test_successful_login(self, email, password):
         emailInput = WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH, c.EMAIL_XPATH)))
@@ -33,7 +36,9 @@ class Test_Tobeto_Platform_Login_Test:
         loginButton = WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH, c.LOGIN_BUTTON_XPATH)))
         loginButton.click()
         systemMessage = WebDriverWait(self.driver,5).until(ec.presence_of_element_located((By.XPATH, c.SYSTEM_SUCCESSFUL_MESSAGE)))
-        assert systemMessage.text == "• Giriş başarılı."  
+        current_url = self.driver.current_url
+        expected_url = "https://tobeto.com/platform"
+        assert  "Giriş başarılı." in systemMessage.text and current_url == expected_url
     
 
 
