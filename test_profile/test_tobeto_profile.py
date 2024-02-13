@@ -6,7 +6,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec 
 from selenium.webdriver.common.keys import Keys
 import pytest
-import openpyxl
 from constants import globalConstants as c
 from selenium.webdriver.common.action_chains import ActionChains
 
@@ -94,7 +93,7 @@ class Test_Tobeto_Platform_Information_Profilo:
         self.driver.execute_script("window.scrollBy(0, 150);")
         address.send_keys("Deneme mah.")
         description= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.CSS_SELECTOR,"textarea[placeholder='Kendini kısaca tanıt']")))
-        description.send_keys("Denemen sjdnhdshshchsdchschsdjsjc")
+        description.send_keys("Deneme sjdnhdshshchsdchschsdjsjc")
         saveButton= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/button")))
         saveButton.click()
         errorMessage= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]"))) 
@@ -111,3 +110,98 @@ class Test_Tobeto_Platform_Information_Profilo:
         photo.click()
         box= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[1]/div[2]/div/div/div/div[2]/div/div[2]")))
         assert box.is_displayed
+
+    #Case 6: “ TC Kimlik No “ boş  kontrolü
+
+    def test_identification_number1(self):
+        email = "kojacer986@vasteron.com"
+        password = "deneme123"
+        self.profile_method(email,password)
+
+        birhtDate= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"birthday"))) 
+        birhtDate.send_keys("12.01.1990")
+        identifier=WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"identifier"))) 
+        identifier.send_keys("")
+        country= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"country")))
+        country.send_keys("Türkiye")
+        city= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"city")))
+        city.send_keys("İstanbul")
+        district= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[10]/select")))
+        sleep(2)
+        district.send_keys("Ümraniye")
+        address= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"address")))
+        sleep(2)
+        self.driver.execute_script("window.scrollBy(0, 150);")
+        address.send_keys("Deneme mah.")
+        saveButton= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//button[@class='btn btn-primary py-2 mb-3 d-inline-block mobil-btn']")))
+        saveButton.click()
+        sleep(2)
+        self.driver.execute_script("window.scrollTo(0, 0)")
+        sleep(3)
+        errorMessage= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.CSS_SELECTOR,"[class='text-danger'] ")))
+        assert "Aboneliklerde fatura için doldurulması zorunlu alan" in errorMessage.text
+        sleep(7)
+   
+   
+    #Case 7: “ TC Kimlik No “ 11 haneden fazla kontrolü
+    def test_identification_number2(self):
+        email = "kojacer986@vasteron.com"
+        password = "deneme123"
+        self.profile_method(email,password)
+
+        birhtDate= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"birthday"))) 
+        birhtDate.send_keys("12.01.1990")
+        identifier=WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"identifier"))) 
+        identifier.send_keys("11111111111111")
+        country= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"country")))
+        country.send_keys("Türkiye")
+        city= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"city")))
+        city.send_keys("Bilecik")
+        district= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[10]/select")))
+        sleep(2)
+        district.send_keys("Söğüt")
+        address= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"address")))
+        sleep(2)
+        self.driver.execute_script("window.scrollBy(0, 150);")
+        address.send_keys("Deneme mah.")
+        description= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.CSS_SELECTOR,"textarea[placeholder='Kendini kısaca tanıt']")))
+        description.send_keys("Deneme sjdnhdshshchsdchschsdjsjc")
+        saveButton= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//button[@class='btn btn-primary py-2 mb-3 d-inline-block mobil-btn']")))
+        saveButton.click()
+        sleep(2)
+        self.driver.execute_script("window.scrollTo(0, 0)")
+        sleep(3)
+        errorMessage= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.CSS_SELECTOR,"i")))
+        assert "TC Kimlik Numarası 11 Haneden Fazla olamaz" in errorMessage
+        sleep(7)    
+    
+    #Case 5:“ Hakkında ” alanı karakter kontrolü
+    def test_about_character_check(self):
+        email = "kojacer986@vasteron.com"
+        password = "deneme123"
+        self.profile_method(email,password)
+
+        birhtDate= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"birthday"))) 
+        birhtDate.send_keys("12.01.1990")
+        identifier=WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"identifier"))) 
+        identifier.send_keys("11111111111")
+        country= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"country")))
+        country.send_keys("Türkiye")
+        city= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"city")))
+        city.send_keys("İstanbul")
+        district= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[10]/select")))
+        sleep(2)
+        district.send_keys("Ümraniye")
+        address= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.NAME,"address")))
+        sleep(2)
+        self.driver.execute_script("window.scrollBy(0, 150);")
+        address.send_keys("Deneme mah.")
+        description= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.CSS_SELECTOR,"textarea[placeholder='Kendini kısaca tanıt']")))
+        description.send_keys("Deneme sjdnhdshshchsfgfdchschsdsdfsddssdsdsssddssdsdddcdssddsssdfsdfsdfsdfsdfsdsdsdfdsdsdfsdfsdfdfsdfsdfsdfsdfsdfsdfsdfsdfdsdcdvdvvdvjsjcsdsfdsdsfsjdhjfdjfjsdfdnfjdfnjsdnfjsnsbksbfjsbjsdnsdknnsdndjsnsdfsdfdsfdsdfsdfsdfdsfdffdfddddgdfgdfgdfgdfgdfgdfgffdfdddgdfgdfgddfdfdgdfgdfgdfgdfgdfgdgdfgdfgdfgdfdfdfdgdfgdfgdfgdfgdfgf")
+        saveButton= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//button[@class='btn btn-primary py-2 mb-3 d-inline-block mobil-btn']")))
+        saveButton.click()
+        sleep(3)
+        self.driver.execute_script("window.scrollBy(0, 100);")
+        errorMessage= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[12]/span")))
+        assert errorMessage , len(description) >300
+        sleep(7)        

@@ -36,6 +36,6 @@ TOBETO_MESSAGE="//section[@class='position-relative py-lg-20 bg-light-light py-s
 
 
 CALENDAR_BUTTON="//div[@class='calendar-btn']"
-DETAİL_XPATH="/html/body/div[4]/div/div/div[2]/div/div/div[2]/div/div[1]/div"
+DETAİL_CSS="[class='fc-scrollgrid-section fc-scrollgrid-section-body  fc-scrollgrid-section-liquid']"
 
 PROFİL_URL="https://tobeto.com/profilim/profilimi-duzenle/kisisel-bilgilerim"
