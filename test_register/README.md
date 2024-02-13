@@ -31,7 +31,6 @@ Beklenen Sonuç : Kayıt ol butonuna tıkladıktan sonra kayıt oluşturmak içi
     Adım 13: Arama iznine tıklandıktan sonra açılan telefon numarası alanını doldur.
     Adım 14: Açılan pop-up’da “Ben robot değilim” Checkbox’ını işaretle.
     Adım 15: “Devam Et” butonuna tıkla.
-
 Beklenen Sonuç : Kayıt başarıyla gerçekleşti bildirimi alınmalıdır.
 
 ![alt text](image-1.png)
@@ -64,9 +63,7 @@ Beklenen Sonuç :   “Girdiğiniz e posta adresi ile kayıtlı üyelik bulunmak
 
 ![alt text](image-5.png)
 
-
   
-	
 # Case 3: Kayıt ol sırasında istenen telefon numarası  karakter kontrolü
     Adım 1: Sitenin kayıt sayfasına gir.
     https://tobeto.com/kayit-ol
@@ -130,7 +127,6 @@ Beklenen Sonuç :   "Şifreniz en az 6 karakterden oluşmalıdır." uyarısı al
 
 
 # Case 5 : Geçersiz E-posta kontrolü 
-	
     Adım 1: E-posta kutusuna geçersiz bir E-posta adresi yaz.
 	İnput: E-posta = e
 

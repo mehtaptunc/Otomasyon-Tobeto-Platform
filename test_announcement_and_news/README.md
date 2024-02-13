@@ -17,7 +17,7 @@ Beklenen Sonuç : Kullanıcı kendisine atana duyuru ve haberleri görüntüleye
 
 ![alt text](image-1.png)
 
-# Case :  Duyuru ve Haberlerim kısmı 9 modüllerin görüntülenebilmesi
+# Case : 2 Duyuru ve Haberlerim kısmı 9 modüllerin görüntülenebilmesi
     Adım 1: Sitenin giriş sayfasına gir.
     https://tobeto.com/giris
     Adım 2: E-posta bölümüne doğru bir mail adresi gir.
@@ -29,7 +29,10 @@ Beklenen Sonuç : Kullanıcı kendisine atana duyuru ve haberleri görüntüleye
     Adım 6: Açılan sayfada, Daha fazla göster butonuna  tıkla.
 Beklenen Sonuç : Kullanıcıya atanan ilk "dokuz"  duyuru ve haber görüntülenebilmelidir. 
 
-![alt text](image-2.png)
+![alt text][def]
 
 
 
+
+
+[def]: image-2.png
