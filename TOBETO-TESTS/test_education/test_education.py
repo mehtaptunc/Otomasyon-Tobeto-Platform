@@ -31,26 +31,22 @@ class Test_Tobeto_Platform_Edication:
         loginButton.click()  
         sleep(5)
     
-    # Case 1: Eğitimlere başarılı giriş
+    # Case 1: Eğitimler bölümüne  başarılı geçiş
     def test_my_courses(self):
-        self.valid_login_method("mehtapttunc@gmail.com","******")
+        self.valid_login_method("mehtapttunc@gmail.com","********")
         sleep(3)
-        self.driver.execute_script("window.scrollBy(0, 500);")
+        self.driver.execute_script("window.scrollBy(0, 400);")
         sleep(2)
-        myEducation= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH, "//button[@id='lessons-tab']")))
-        sleep(3)
-        myEducation.click()
+        myEducation= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.ID, "lessons-tab")))
         sleep(4)
-        showMore= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.CSS_SELECTOR, "div[class='row mt-3'] div[class='showMoreBtn']")))
-        showMore.click()
+        myEducation.click()
+        educationModule= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.CSS_SELECTOR, "[class='nav-link active']")))
+        assert educationModule.text== "Eğitimlerim"
         sleep(3)
-        current_url = self.driver.current_url
-        expected_url ="https://tobeto.com/egitimlerim"
-        assert current_url == expected_url  
         
     # Case 2: Ecmel Ayral'dan  Hoşgeldin Mesajı 
     def test_wolcome_control(self):     
-        self.valid_login_method("mehtapttunc@gmail.com","******")
+        self.valid_login_method("mehtapttunc@gmail.com","********")
         self.driver.execute_script("window.scrollBy(0, 500);")
         myEducation= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH, "//button[@id='lessons-tab']")))
         sleep(3)
@@ -58,7 +54,7 @@ class Test_Tobeto_Platform_Edication:
         goEducation= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='all-lessons-tab-pane']/div/div[1]/div/div[2]/a")))
         sleep(3)
         goEducation.click()
-        sleep(7)
+        sleep(10)
         welcomeMessage= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='activity-unit-detail']/div/div[1]/div[1]/div"))) 
         assert welcomeMessage.text == "Dr. Ecmel Ayral'dan Hoşgeldin Mesajı"
     

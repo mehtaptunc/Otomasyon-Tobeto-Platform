@@ -83,7 +83,7 @@ class Test_Tobeto_Platform_Register_Test:
 
     #Case 1 : Başarılı Kayıt Ol Kontrolü
     def test_successful_register(self):
-        self.register("elcin986@vasteron.com", "123deneme", "123deneme", "5464587966")
+        self.register("elciinz@vasteron.com", "123deneme", "123deneme", "5474587966")
         sleep (2)
         registerMessage = WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.CSS_SELECTOR,"span[class='success-payment-text']")))
         assert "Tobeto Platform'a kaydınız başarıyla gerçekleşti." in registerMessage.text 

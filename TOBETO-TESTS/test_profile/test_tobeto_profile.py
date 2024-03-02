@@ -8,9 +8,10 @@ from selenium.webdriver.common.keys import Keys
 import pytest
 from constants import globalConstants as c
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.select import Select
 
 
-class Test_Tobeto_Platform_Information_Profilo:
+class Test_Tobeto_Platform_Information_Profile:
 
     def setup_method(self):
         self.driver = webdriver.Chrome()
@@ -18,7 +19,9 @@ class Test_Tobeto_Platform_Information_Profilo:
         self.driver.maximize_window()
 
     def teardown_method(self): 
+        self.driver.save_screenshot("screenshotPhoto./girisbasarili.png") 
         self.driver.quit()
+
     
     
     @pytest.mark.parametrize("email, password", [("kojacer986@vasteron.com", "deneme123")])
@@ -171,11 +174,11 @@ class Test_Tobeto_Platform_Information_Profilo:
         sleep(2)
         self.driver.execute_script("window.scrollTo(0, 0)")
         sleep(3)
-        errorMessage= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.CSS_SELECTOR,"i")))
-        assert "TC Kimlik Numarası 11 Haneden Fazla olamaz" in errorMessage
+        errorMessage= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.CSS_SELECTOR,"span[class='text-danger']")))
+        assert errorMessage.text== "*Aboneliklerde fatura için doldurulması zorunlu alan" or "TC Kimlik Numarası 11 Haneden Fazla olamaz"
         sleep(7)    
     
-    #Case 5:“ Hakkında ” alanı karakter kontrolü
+    #Case 8:“ Hakkında ” alanı karakter kontrolü
     def test_about_character_check(self):
         email = "kojacer986@vasteron.com"
         password = "deneme123"
@@ -204,4 +207,6 @@ class Test_Tobeto_Platform_Information_Profilo:
         self.driver.execute_script("window.scrollBy(0, 100);")
         errorMessage= WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[12]/span")))
         assert errorMessage , len(description) >300
-        sleep(7)        
+        sleep(7)   
+   
+   

@@ -11,8 +11,6 @@ from constants import globalConstants as c
 
 
 
-
-
 class Test_Tobeto_Platform_Login_Test:
 
     def setup_method(self):
@@ -21,13 +19,14 @@ class Test_Tobeto_Platform_Login_Test:
         self.driver.maximize_window()
 
     def teardown_method(self): 
+        self.driver.save_screenshot("screenshotPhoto./girisbasarili.png") 
         self.driver.quit()
 
 
     #Test Senaryosu 1 Adı : Giriş Paneli Kontrolü
     #Case 1 : Başarılı Giriş Kontrolü
 
-    @pytest.mark.parametrize("email, password", [("kojacer986@vasteron.com", "deneme123")])
+    @pytest.mark.parametrize("email, password", [("kojacer986@vasteron.com", "deneme123"),("majajiv633@vasteron.com", "deneme123")])
     def test_successful_login(self, email, password):
         emailInput = WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH, c.EMAIL_XPATH)))
         emailInput.send_keys(email)
@@ -39,6 +38,7 @@ class Test_Tobeto_Platform_Login_Test:
         current_url = self.driver.current_url
         expected_url = "https://tobeto.com/platform"
         assert  "Giriş başarılı." in systemMessage.text and current_url == expected_url
+        
     
 
 
@@ -53,6 +53,7 @@ class Test_Tobeto_Platform_Login_Test:
         loginButton.click()
         errorMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, c.ERROR_MESSAGE_XPATH)))
         assert errorMessage.text == "Doldurulması zorunlu alan*"
+        
        
     #Case 3 :  E-posta veya Şifre Hatalı Girildiğinde
     @pytest.mark.parametrize("email, password", [("fffffg@.com", "475133"), ("kojacer986@.com", "1237"),("45512@gmail.com", "test123")])
@@ -65,3 +66,4 @@ class Test_Tobeto_Platform_Login_Test:
         loginButton.click()    
         errorMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.CSS_SELECTOR, "div[class='toast-body']")))
         assert errorMessage.text== "• Geçersiz e-posta veya şifre."
+        

@@ -32,7 +32,7 @@ class Test_Tobeto_Platform_MyAnnouncement_And_News:
    
    #Case 1 : Duyuru ve Haberlerim kısmına erişim kontrolü
     def test_announceAndNews(self):    
-        self.valid_login_method("mehtapttunc@gmail.com","tobeto987654")
+        self.valid_login_method("mehtapttunc@gmail.com","********")
         sleep(3)
         self.driver.execute_script("window.scrollBy(0, 150);") 
         sleep(3)   
@@ -43,7 +43,7 @@ class Test_Tobeto_Platform_MyAnnouncement_And_News:
     
     #Case 2 : Duyuru ve Haberlerim kısmı 9 modüllerin görüntülenebilmesi
     def test_show_more(self):      
-        self.valid_login_method("mehtapttunc@gmail.com","tobeto987654")
+        self.valid_login_method("mehtapttunc@gmail.com","*******")
         sleep(3)
         self.driver.execute_script("window.scrollBy(0, 150);") 
         sleep(3)   
